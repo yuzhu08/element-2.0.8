@@ -108,7 +108,7 @@
         default: true
       },
       closeOnClickModal: {
-        default: true
+        default: false
       },
       closeOnPressEscape: {
         default: true
@@ -123,6 +123,14 @@
       roundButton: {
         default: false,
         type: Boolean
+      },
+      modalAppendToBody: {
+        type: Boolean,
+        default: true
+      },
+      appendToCustom: {
+        type: String,
+        default: 'app-main'
       }
     },
 
@@ -263,6 +271,10 @@
       visible(val) {
         if (val) {
           this.uid++;
+          if (this.appendToCustom) {
+            let dom = document.getElementsByClassName(this.appendToCustom)[0];
+            dom.appendChild(this.$el);
+          }
           if (this.$type === 'alert' || this.$type === 'confirm') {
             this.$nextTick(() => {
               this.$refs.confirm.$el.focus();
@@ -275,6 +287,10 @@
         // prompt
         if (this.$type !== 'prompt') return;
         if (val) {
+          if (this.appendToCustom) {
+            let dom = document.getElementsByClassName(this.appendToCustom)[0];
+            dom.appendChild(this.$el);
+          }
           setTimeout(() => {
             if (this.$refs.input && this.$refs.input.$el) {
               this.getInputElement().focus();

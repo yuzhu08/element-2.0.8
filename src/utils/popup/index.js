@@ -219,6 +219,7 @@ export default {
     },
 
     close() {
+      this.$el.style.display = 'none';
       if (this.willClose && !this.willClose()) return;
 
       if (this._openTimer !== null) {

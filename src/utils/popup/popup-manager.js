@@ -5,23 +5,16 @@ let hasModal = false;
 
 const getModal = function() {
   if (Vue.prototype.$isServer) return;
-  let modalDom = PopupManager.modalDom;
-  if (modalDom) {
-    hasModal = true;
-  } else {
-    hasModal = false;
-    modalDom = document.createElement('div');
-    PopupManager.modalDom = modalDom;
+  let modalDom = document.createElement('div');
 
-    modalDom.addEventListener('touchmove', function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    });
+  modalDom.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  });
 
-    modalDom.addEventListener('click', function() {
-      PopupManager.doOnModalClick && PopupManager.doOnModalClick();
-    });
-  }
+  modalDom.addEventListener('click', function() {
+    PopupManager.doOnModalClick && PopupManager.doOnModalClick();
+  });
 
   return modalDom;
 };
@@ -106,12 +99,25 @@ const PopupManager = {
     modalDom.tabIndex = 0;
     modalDom.style.display = '';
 
-    this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass });
+    this.modalStack.push({ id: id, zIndex: zIndex, modalClass: modalClass, modalDom: modalDom});
   },
 
   closeModal: function(id) {
     const modalStack = this.modalStack;
-    const modalDom = getModal();
+    let modalDom;
+    modalStack.forEach((item)=>{
+      if (item.id === id) {
+        modalDom = item.modalDom;
+        addClass(modalDom, 'v-modal-leave');
+        setTimeout(() => {
+          if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
+          modalDom.style.display = 'none';
+          item.modalDom = undefined;
+          removeClass(modalDom, 'v-modal-leave');
+        }, 200);
+        return;
+      }
+    });
 
     if (modalStack.length > 0) {
       const topItem = modalStack[modalStack.length - 1];
@@ -135,19 +141,7 @@ const PopupManager = {
       }
     }
 
-    if (modalStack.length === 0) {
-      if (this.modalFade) {
-        addClass(modalDom, 'v-modal-leave');
-      }
-      setTimeout(() => {
-        if (modalStack.length === 0) {
-          if (modalDom.parentNode) modalDom.parentNode.removeChild(modalDom);
-          modalDom.style.display = 'none';
-          PopupManager.modalDom = undefined;
-        }
-        removeClass(modalDom, 'v-modal-leave');
-      }, 200);
-    }
+    //
   }
 };
 

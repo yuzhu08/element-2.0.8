@@ -28,7 +28,9 @@ const defaults = {
   beforeClose: null,
   dangerouslyUseHTMLString: false,
   center: false,
-  roundButton: false
+  roundButton: false,
+  modalAppendToBody: true,
+  appendToCustom: 'app-main'
 };
 
 import Vue from 'vue';
