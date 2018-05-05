@@ -4,38 +4,14 @@
 
 # Element
 
-[![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
-[![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
-[![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
-[![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
-![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
-![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-chalk/index.css?compression=gzip&label=gzip%20size:%20CSS)
-[![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(Chinese)
-[![Join the chat at https://gitter.im/element-en/Lobby](https://badges.gitter.im/element-en/Lobby.svg)](https://gitter.im/element-en/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(English)
-[![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
-[![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
+此版本是根据element-ui 2.0.8版本修改而来，主要用于解决在实际项目上遇到的一些问题
 
-> A Vue.js 2.0 UI Toolkit for Web.
+## 修改内容
 
-## Links
-- Homepage and documentation
-  - International users: http://element.eleme.io/
-  - Chinese users: http://element-cn.eleme.io/
-- [awesome-element](https://github.com/ElementUI/awesome-element)
-- [FAQ](./FAQ.md)
-- [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
-- [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
-- [Element for React](https://github.com/eleme/element-react)
-- [Element for Angular](https://github.com/eleme/element-angular)
-- [Atom helper](https://github.com/ElemeFE/element-helper)
-- Starter kit
-  - [element-starter](https://github.com/ElementUI/element-starter)
-  - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
-- [Design resources](https://github.com/ElementUI/Resources) (working in progress)
-- Boilerplate for bug reports
-  - [CodePen](https://codepen.io/anon/pen/ozYpNA)
-  - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+- 修改dialog弹出框的遮罩层逻辑，使每一个dialog弹出框对应一个遮罩层
+- 移除dialog弹出框的关闭动画，以解决在ie下关闭闪屏的问题
+- 修复分页组件在ie下回车无法跳转的问题
+- 更新tree组件为官方2.3.4版本，以使用最新的api
 
 ## Install
 ```shell
