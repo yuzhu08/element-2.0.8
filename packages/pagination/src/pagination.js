@@ -25,7 +25,7 @@ export default {
       validator(value) {
         return (value | 0) === value && value > 4 && value < 22 && (value % 2) === 1;
       },
-      default: 7
+      default: 5
     },
 
     currentPage: {
